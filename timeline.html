@@ -10,7 +10,8 @@
 	<script src="js/jquery-2.2.0.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/svg_helper.js"></script>
+    <script src="js/script.js"></script>
 	<style>
 		body {
 		position: relative;
@@ -39,7 +40,22 @@
         }
         #content {
             overflow:auto;
-}
+        }
+        
+        #svgContainer { 
+            z-index: -10;
+            position:absolute;
+            opacity: 0.5;
+        }
+
+        #outer{
+            margin:0 auto;
+            width: 80%;
+        }
+
+        #myNewPath{
+            color: #ff9800;
+        }
 	</style>
 </head>
 
@@ -47,11 +63,32 @@
 	<div id="title">
 		<h1 class="text-center" style="text-color:#FFFFFF">TIMELINE</h1>
 	</div>
+    
+    <div id="svgContainer" style="margin: 50px 50px;">
+        <svg id="svg1" width="0" height="0" >
+        <path
+                id="myNewPath"
+                d="M0 0"             
+                stroke-width="10px"
+                style="stroke:#ff9800; fill:#ff9800;  "/>
+            <path
+            id="someOtherPath"
+            d="M0 0"             
+            stroke-width="10px"
+            style="stroke:#800; fill:#ff9800;  "/>
+            <path
+            id="yetAnotherPath"
+            d="M0 0"             
+            stroke-width="10px"
+            style="stroke:#800; fill:#ff9800;  "/>
+    </div>
+    
 	<div class="container">
 		<div class="row">
 			<nav class="col-sm-3" id="myScrollspy">
 				<ul class="nav nav-pills nav-stacked">
-                    <li><a href="#section1">1938</a></li>
+                    <li style="display:none"><a href="#title"></a></li>
+                        <li><a href="#section1">1938</a></li>
                         <li><a href="#section2">1961</a></li>
                         <li><a href="#section3">1980</a></li>
                         <li><a href="#section4">2011</a></li>
@@ -76,11 +113,13 @@
 			
 				<div id="section4">
 					<h1>Section 4</h1>
-                    <p style="height:50vh">Lorem lipsum</p>
+                    <p style="height:100vh">Lorem lipsum</p>
 				</div>			
 		      </div>
 	
 	</div>
+    
+</svg>
 </body>
 
 </html>
