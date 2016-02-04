@@ -1,0 +1,43 @@
+body {
+		position: relative;
+		}
+		ul.nav-pills {
+		top: 10vh;
+		position: fixed;
+		}
+		div.col-sm-9 div {
+		height: 250px;
+		font-size: 28px;
+		}
+		#section1 {color: #fff; background-color: #1E88E5;}
+		#section2 {color: #fff; background-color: #673ab7;}
+		#section3 {color: #fff; background-color: #ff9800;}
+		#section4 {color: #fff; background-color: #00bcd4;}
+		
+		@media screen and (max-width: 810px) {
+		#section1, #section2, #section3, #section4  {
+        margin-left: 150px;
+		}
+		}
+        #title{
+            margin-top:55vh;
+            margin-bottom:55vh;
+        }
+        #content {
+            overflow:auto;
+        }
+        
+        #svgContainer { 
+            z-index: -10;
+            position:absolute;
+            opacity: 0.5;
+        }
+
+        #outer{
+            margin:0 auto;
+            width: 80%;
+        }
+
+        #myNewPath{
+            color: #ff9800;
+        }

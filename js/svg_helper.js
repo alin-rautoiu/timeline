@@ -67,10 +67,3 @@ function connectElements(svg, path, startElem, endElem) {
     drawPath(svg, path, startX, startY, endX, endY);
 
 }
-
-function connectAll() {
-    // connect all the paths you want!
-    connectElements($("#svg1"), $("#myNewPath"), $("#section1"),  $("#section2"));
-    connectElements($("#svg1"), $("#someOtherPath"), $("#section2"), $("#section3")  );
-    connectElements($("#svg1"), $("#yetAnotherPath"), $("#section3"), $("#section4")  );
-}

@@ -40,3 +40,10 @@ $(window).resize(function () {
     $("#svg1").attr("width", "0");
     connectAll();
 });
+
+function connectAll() {
+    // connect all the paths you want!
+    connectElements($("#svg1"), $("#myNewPath"), $("#section1"),  $("#firstpoint"));
+    connectElements($("#svg1"), $("#someOtherPath"), $("#section2"), $("#section3")  );
+    connectElements($("#svg1"), $("#yetAnotherPath"), $("#section3"), $("#section4")  );
+}
