@@ -27,17 +27,38 @@ body {
             overflow:auto;
         }
         
-        #svgContainer { 
-            z-index: -10;
-            position:absolute;
-            opacity: 0.5;
-        }
-
         #outer{
             margin:0 auto;
             width: 80%;
+        }             
+        
+        .line-header{           
+            height: 10px;
+            
         }
-
-        #myNewPath{
-            color: #ff9800;
+               
+        .line-body {
+            height: 200vh;
+            width: 5px;
+            margin: 0 auto; 
+        }
+        
+        .line-header:hover, .line-body:hover {
+            background-color: yellow;
+        }
+        
+        .prop1{
+            background-color: teal
+        }
+        
+        .prop2{
+            background-color: #AA9800
+        }
+        
+        .prop3{
+            background-color: #543ab7
+        }
+        
+        .prop4{
+            background-color: #1E88E5
         }

@@ -1,48 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro-RO">
 
 <head>
 	<title>Timeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
 	    
     
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-	<script src="js/jquery-2.2.0.min.js"></script>
+    	
+    <script src="js/jquery-2.2.0.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/svg_helper.js"></script>
     <script src="js/script.js"></script>
-    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    
 </head>
 
 <body>
 	<div id="title">
 		<h1 class="text-center" style="text-color:#FFFFFF">TIMELINE</h1>
-	</div>
-    
-    <div id="svgContainer" style="margin: 50px 50px;">
-        <svg id="svg1" width="0" height="0" >
-        <path
-            id="myNewPath"
-            d="M0 0"             
-            stroke-width="5px"
-            style="stroke:#ff9800; fill:#ff9800;  "/>
-        <path
-            id="someOtherPath"
-            d="M0 0"             
-            stroke-width="5px"
-            style="stroke:#800; fill:#ff9800;  "/>
-        <path
-            id="yetAnotherPath"
-            d="M0 0"             
-            stroke-width="5px"
-            style="stroke:#800; fill:#ff9800;  "/>
-            </svg>
-    </div>
-    
-	<div class="container">
+	</div>     
+       
+	<div class="container">            
+        
 		<div class="row">
-			<nav class="col-sm-3" id="myScrollspy">
+			<nav class="col-md-3" id="myScrollspy">
 				<ul class="nav nav-pills nav-stacked">
                     <li style="display:none"><a href="#title"></a></li>
                         <li><a href="#section1">1938</a></li>
@@ -52,34 +34,71 @@
 
 				</ul>				
 			</nav>
-			<div id="content" class="col-sm-6">
+		</div>
+        <div class="row">
+			<div  class="col-md-6 col-md-offset-3">
 				<div id="section1">
 					<h1>Section 1</h1>
                     <p style="height:200vh">Lorem lipsum</p>
 				</div>
-			
-				<div id="section2">
-					<h1>Section 2</h1>
-                    <p style="height:50vh">Lorem lipsum</p>
+			</div>
+            <div  class="col-md-3">
+				<div class="row">
+                    <div class="col-md-3 prop1 line-header">
+                    </div>
+                    <div class="col-md-3 prop2 line-header">
+                    </div>
+                    <div class="col-md-3 prop3 line-header">
+                    </div>
+                    <div class="col-md-3 prop4 line-header">
+                    </div>
 				</div>
-			
-				<div id="section3">
-					<h1>Section 3</h1>
-                    <p style="height:50vh">Lorem lipsum</p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="prop1 line-body">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div  class="prop2 line-body">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="prop3 line-body">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="prop4 line-body">
+                        </div>
+                    </div>
 				</div>
-			
-				<div id="section4">
-					<h1>Section 4</h1>
-                    <p style="height:100vh">Lorem lipsum</p>
-				</div>			
+			</div>
+        </div>
+            <div class="row">
+				<div class="col-md-6 col-md-offset-3">
+				    <div id="section2">
+					   <h1>Section 2</h1>
+                    <p style="height:200vh">Lorem lipsum</p>
+				    </div>
+			     </div>
+            </div>            
+            <div class="row">
+				<div class="col-md-6 col-md-offset-3">
+				    <div id="section3">
+					   <h1>Section 3</h1>
+                    <p style="height:200vh">Lorem lipsum</p>
+				    </div>
+			     </div>
+            </div>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+				    <div id="section4">
+					   <h1>Section 4</h1>
+                    <p style="height:200vh">Lorem lipsum</p>
+				    </div>
+			     </div>
+	
 		      </div>
-              <div style="background-color:black" class="col-sm-3">
-				<div id="firstpoint">
-				</div>
-              </div>
-	   </div>
-    </div>
-    
+        </div>    
 
 </body>
 
