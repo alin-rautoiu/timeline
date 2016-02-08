@@ -25,5 +25,8 @@
         $('.active').removeClass("active");
         $(this).addClass("active");
     });
+    
+        $("[data-toggle=popover]")
+      .popover()
        
 });
