@@ -1,125 +1,138 @@
 body {
-		position: relative;
-		}
-		ul.nav-pills {
-		top: 10vh;
-		position: fixed;
-		}
-		div.col-sm-9 div {
-		height: 250px;
-		font-size: 28px;
-		}
-        
-        a.underline_hawk {
-            color: #444444;
-            text-decoration: none;
-            border-bottom: 3px solid #8F64AB;
-        }
-        
-        a.underline_hawk:hover{
-            color: #444444;
-            text-decoration: none;
-            border-bottom: 5px solid #8F64AB;
-        }
-        
-		#section1 {color: #fff; background-color: #8F64AB; text-align: center}
-		#section2 {color: #fff; background-color: #673ab7;}
-		#section3 {color: #fff; background-color: #ff9800;}
-		#section4 {color: #fff; background-color: #00bcd4;}
-		
-		@media screen and (max-width: 810px) {
-            #section1, #section2, #section3, #section4  {
-            margin-left: 150px;
-            }
-		}
-        
-        #title{
+position: relative;
+}
 
-        }
-       
-        .nopadding {
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        .novertical {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-        }
-        
-        .vertical {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-        
-        #content {
-            overflow:auto;
-        }
-        
-        #outer{
-            margin:0 auto;
-            width: 80%;
-        }             
-        
-        .line-header{           
-            height: 10px;
-            
-        }
-               
-        .line-body {
-            height: 200vh;
-            width: 5px;
-            margin: 0 auto; 
-        }
-        
-        .prop1{
-            background-color: teal
-        }
-        
-        .prop2{
-            background-color: #AA9800
-        }
-        
-        .prop3{
-            background-color: #543ab7
-        }
-        
-        .prop4{
-            background-color: #1E88E5
-        }
-        
-        .sec1-btn {
-        background-color: #8F64AB;
-        border-color: #8F64AB;
-        }
-        .sec1-btn:hover,
-        .sec1-btn:focus,
-        .sec1-btn:active,
-        .sec1-btn.active {
-        background-color: #82569f;
-        border-color: #754d8f;
-        }
-        .sec1-btn.disabled:hover,
-        .sec1-btn.disabled:focus,
-        .sec1-btn.disabled:active,
-        .sec1-btn.disabled.active,
-        .sec1-btn[disabled]:hover,
-        .sec1-btn[disabled]:focus,
-        .sec1-btn[disabled]:active,
-        .sec1-btn[disabled].active,
-        fieldset[disabled] .sec1-btn:hover,
-        fieldset[disabled] .sec1-btn:focus,
-        fieldset[disabled] .sec1-btn:active,
-        fieldset[disabled] .sec1-btn.active {
-        background-color: #8F64AB;
-        border-color: #8F64AB;
-        }
+ul.nav-pills {
+top: 10vh;
+position: fixed;
+}
 
+div.col-sm-9 div {
+height: 250px;
+font-size: 28px;
+}
+
+a.underline_hawk {
+    color: #444444;
+    text-decoration: none;
+    border-bottom: 3px solid #8F64AB;
+}
+
+a.underline_hawk:hover{
+    color: #444444;
+    text-decoration: none;
+    border-bottom: 5px solid #8F64AB;
+}
+
+#section1 {color: #fff;
+    background-color: #8F64AB;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    }
+#section2 {color: #fff;
+    background-color: #7aa;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    }
+#section3 {color: #fff; background-color: #ff9800;}
+#section4 {color: #fff; background-color: #00bcd4;}
+
+@media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section4  {
+    margin-left: 150px;
+    }
+}
+
+#title{
+
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.novertical {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.vertical {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#content {
+    overflow:auto;
+}
+
+#outer{
+    margin:0 auto;
+    width: 80%;
+}             
+
+.line-header{           
+    height: 10px;
+    
+}
         
-        
-        .line-header:hover, .line-body:hover {
-            background-color: yellow;
-        }
-        
+.line-body {
+    height: 200vh;
+    width: 5px;
+    margin: 0 auto; 
+}
+
+.prop1{
+    background-color: #7aa
+}
+
+.prop2{
+    background-color: #AA9800
+}
+
+.prop3{
+    background-color: #543ab7
+}
+
+.prop4{
+    background-color: #1E88E5
+}
+
+.sec1-btn {
+background-color: #8F64AB;
+border-color: #8F64AB;
+}
+.sec1-btn:hover,
+.sec1-btn:focus,
+.sec1-btn:active,
+.sec1-btn.active {
+background-color: #82569f;
+border-color: #754d8f;
+}
+.sec1-btn.disabled:hover,
+.sec1-btn.disabled:focus,
+.sec1-btn.disabled:active,
+.sec1-btn.disabled.active,
+.sec1-btn[disabled]:hover,
+.sec1-btn[disabled]:focus,
+.sec1-btn[disabled]:active,
+.sec1-btn[disabled].active,
+fieldset[disabled] .sec1-btn:hover,
+fieldset[disabled] .sec1-btn:focus,
+fieldset[disabled] .sec1-btn:active,
+fieldset[disabled] .sec1-btn.active {
+background-color: #8F64AB;
+border-color: #8F64AB;
+}
+
+
+
+.line-header:hover, .line-body:hover {
+    background-color: yellow;
+}
