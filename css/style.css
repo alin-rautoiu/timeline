@@ -51,6 +51,11 @@ a.underline_hawk:hover{
 
 }
 
+.section-img img {
+    margin: 15px;
+    width: 95%;
+}
+
 .nopadding {
     padding: 0 !important;
     margin: 0 !important;
