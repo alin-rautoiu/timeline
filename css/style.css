@@ -1,15 +1,14 @@
 body {
-position: relative;
+    position: relative;
 }
 
-ul.nav-pills {
-top: 10vh;
-position: fixed;
+.nav {
+    float: right
 }
 
 div.col-sm-9 div {
-height: 250px;
-font-size: 28px;
+    height: 250px;
+    font-size: 28px;
 }
 
 a.underline_hawk {
