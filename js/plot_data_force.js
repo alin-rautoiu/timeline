@@ -10,7 +10,8 @@ var dataset = {
                 { name: "daredevil", depth: 5}, //4
                 { name: "nhawk", depth: 6}, //5
                 { name: "hawkeye", depth: 7}, //6
-                { name: "invisible", depth: 8} //7
+                { name: "invisible", depth: 0}, //7
+                { name: "bendisdare", depth: 5.5}, //4
                 
                 
         ],
@@ -23,9 +24,11 @@ var dataset = {
                 { source: 2, target: 4, name: 'fury_daredevil'},
                 { source: 2, target: 6, name: 'fury_hawkeye'},
                 { source: 3, target: 6, name: 'master_daredevil'},
+                { source: 4, target: 8, name: 'daredevil_bendisdare'},
+                { source: 8, target: 6, name: 'bendisdare_hawkeye'},
                 { source: 4, target: 6, name: 'daredevil_hawkeye'},                                                
                 { source: 5, target: 6, name: 'nhawk_hawkeye'},
-                { source: 6, target: 7, name: 'hawkeye_invisile'}
+                { source: 7, target: 0, name: 'hawkeye_invisile'}
         ]
 };
                      
@@ -33,16 +36,16 @@ var force = d3.layout.force()
                      .nodes(dataset.nodes)
                      .links(dataset.edges)
                      .size([w, h])
-                     //.linkDistance([50])    
-                     .linkStrength(0.1)
-                     .gravity(.2)    
-                     .charge([-100])            
+                     .linkStrength(0.2)
+                     .gravity(.1)    
+                     .charge([-100])
+                     .friction(0)            
                      .start();
 
 var colors = d3.scale.category10();
 
 
-var svg = d3.select("body")
+var svg = d3.select("#drawing_area")
             .append("svg")
             .attr("width", w)
             .attr("height", h);         
@@ -53,13 +56,7 @@ var edges = svg.selectAll("path")
         .append("path")
         .attr("id", function(d, i) {
             return d.name;
-        })
-        .attr('data-toggle', "popover")
-        .attr('data-content', "popover")
-        .attr('title', function(d){
-            return d.name;
-        })
-        .attr('data-trigger', "hover")
+        })        
         .style("stroke", "#ccc")
         .style("stroke-width", 5)
         .style("fill", "none");
@@ -68,8 +65,15 @@ var gnodes = svg.selectAll("g.gnode")
         .data(dataset.nodes)
         .enter()
         .append("g")
+        .attr('type', "button")
+        .attr('data-toggle', "modal")
+        .attr('data-target', "#myModal")
         .classed('gnode', true);
-        
+     
+var dragstart = function(d){
+    d3.select(this).classed("fixed", d.fixed = true);
+}  
+ 
 var nodes = gnodes
         .append("circle")
         .attr("r", function(d){
@@ -87,7 +91,8 @@ var nodes = gnodes
         .style("fill", function(d, i) {
                 return colors(i);
         })
-        .call(force.drag);
+        .call(force.drag().on("dragstart", dragstart));
+
 
 svg.selectAll("path").each(
     function(d,i){
@@ -101,26 +106,33 @@ var label = gnodes.append("text")
         
 //Every time the simulation "ticks", this will be called
     force.on("tick", function(e) {
-    var ky = 1.2 * e.alpha;
+    var ky = e.alpha;
     var left_right = 1;
         edges[0].forEach(function(d, i) {
             if(i == 0) {
                 d.__data__.source.y = 120;
                 d.__data__.source.x = w / 2;
             }
-                d.__data__.source.y += (d.__data__.source.depth * 120 - d.__data__.source.y) * ky;
+            else if (i == 2)
+            {
+                d.__data__.target.y = h - 200;
+                d.__data__.target.x = w / 2;
+            }
+            else
+            { 
+                d.__data__.source.y += (d.__data__.source.depth * 120 - d.__data__.source.y);
                 
                 var size = 1;
                 dataset.edges.forEach(function(obj){
-                    if(obj.name.split("_")[1] === d.__data__.source.name){
+                    if(obj.name.includes(d.__data__.source.name)){
                         size++;
                     }
                 });
                 
-                if(size >= 4) left_right *= -1;
+                if(size >= 3) left_right *= -1;
                 
-                d.__data__.source.x += (w /2 + (size * left_right * 100) - d.__data__.source.x) * ky;
-                           
+                d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * ky; 
+            }                          
         });
 
         edges.attr('d', function(d){

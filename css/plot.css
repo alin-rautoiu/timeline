@@ -1,11 +1,11 @@
-#spirit_hawkeye:hover {
-    background-color: red;
+#drawing_area{
+    left: -350px;
 }
 
-#spirit:hover {
-    background-color: red;
+#invisible{
+    visibility: hidden;
 }
 
-#hawkeye:hover {
-    background-color: red;
+#hawkeye_invisile{
+    visibility: hidden;
 }
