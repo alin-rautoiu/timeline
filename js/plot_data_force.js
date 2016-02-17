@@ -31,6 +31,8 @@ var dataset = {
                 { source: 7, target: 0, name: 'hawkeye_invisile'}
         ]
 };
+
+var years = [1940, 1955, 1965, 1970, 1981, 2002, 2006, 2012];
                      
 var force = d3.layout.force()
                      .nodes(dataset.nodes)
@@ -38,8 +40,8 @@ var force = d3.layout.force()
                      .size([w, h])
                      .linkStrength(0.2)
                      .gravity(.1)    
-                     .charge([-100])
-                     .friction(0)            
+                     .charge([-500])
+                     .friction(0.1)            
                      .start();
 
 var colors = d3.scale.category10();
@@ -49,17 +51,15 @@ var svg = d3.select("#drawing_area")
             .append("svg")
             .attr("width", w)
             .attr("height", h);         
-         
+
+        
 var edges = svg.selectAll("path")
         .data(dataset.edges)
         .enter()
         .append("path")
         .attr("id", function(d, i) {
             return d.name;
-        })        
-        .style("stroke", "#ccc")
-        .style("stroke-width", 5)
-        .style("fill", "none");
+        });       
 
 var gnodes = svg.selectAll("g.gnode")
         .data(dataset.nodes)
@@ -73,17 +73,21 @@ var gnodes = svg.selectAll("g.gnode")
 var dragstart = function(d){
     d3.select(this).classed("fixed", d.fixed = true);
 }  
- 
-var nodes = gnodes
-        .append("circle")
-        .attr("r", function(d){
-            var size = 1;
+
+var nodeSize = function(d){
+    var size = 1;
             dataset.edges.forEach(function(obj){
                 if(obj.name.split("_")[0] === d.name){
                     size++;
                 }
             });
             return size * 10;
+}
+ 
+var nodes = gnodes
+        .append("circle")
+        .attr("r", function(d){
+            return nodeSize(d);
         })
         .attr("id", function(d, i) {
             return d.name;
@@ -91,22 +95,41 @@ var nodes = gnodes
         .style("fill", function(d, i) {
                 return colors(i);
         })
+        .on('mouseover', function(d){
+            //d3.select(this).style({opacity:'0.8'});
+        })
+        .on('mouseout', function(d){
+            //d3.select(this).style({opacity:'1'});
+        })
         .call(force.drag().on("dragstart", dragstart));
 
 
 svg.selectAll("path").each(
     function(d,i){
-        $(this).popover({title:"title", content:"content", container:"body"});
-        // and/or $(this).tooltip({title:"tooltip - title", container:"body"});
+        
     });            
             
+var time = svg.selectAll('text')
+    .data(years)
+    .enter()
+    .append('text')
+    .text(function(d) {return d;})
+    .attr('x', 300)
+    .attr('y', function(d, i){
+        return nodes[0][i].__data__.y;
+    });
         
 var label = gnodes.append("text")
             .text(function(d) {return d.name});             
+
+label
+    .attr("text-anchor", "middle")
+    .attr("y", function(d){
+        return -1 * nodeSize(d) - 5;
+    });
         
-//Every time the simulation "ticks", this will be called
     force.on("tick", function(e) {
-    var ky = e.alpha;
+    var k = e.alpha;
     var left_right = 1;
         edges[0].forEach(function(d, i) {
             if(i == 0) {
@@ -131,7 +154,13 @@ var label = gnodes.append("text")
                 
                 if(size >= 3) left_right *= -1;
                 
-                d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * ky; 
+                d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * k;
+                if(d.__data__.source.x >= w - nodeSize(d) * 2){
+                    d.__data__.source.x = w - nodeSize(d) * 2;
+                }
+                else if(d.__data__.source.x <= nodeSize(d) * 2) {
+                    d.__data__.source.x = nodeSize(d) * 2;
+                }
             }                          
         });
 
@@ -145,7 +174,13 @@ var label = gnodes.append("text")
 
        gnodes.attr("transform", function(d) { 
             return 'translate(' + [d.x, d.y] + ')'; 
-        });   
+       });
+       
+    time
+    .attr('x', 300)
+    .attr('y', function(d, i){
+        return nodes[0][i].__data__.y;
+    });   
                 
     });
     

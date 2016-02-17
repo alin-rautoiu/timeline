@@ -1,6 +1,8 @@
 #drawing_area{
-    left: -350px;
+    left: -300px;
 }
+
+
 
 #invisible{
     visibility: hidden;
@@ -8,4 +10,33 @@
 
 #hawkeye_invisile{
     visibility: hidden;
+}
+
+path{
+    stroke:#ccc;
+    stroke-width: 5px;
+    fill:none;
+}
+
+path:hover {
+    stroke:yellow;
+    -webkit-animation-name: hover_line; 
+    -webkit-animation-duration: 0.5s;
+    
+    -moz-animation-name: hover_line; 
+    -moz-animation-duration: 0.5s;
+    
+    animation-name: hover_line;
+    animation-duration: 0.5s;
+}
+
+@-webkit-keyframes hover_line {
+    from {stroke: #ccc;}
+    to {stroke: yellow;}
+}
+
+/* Standard syntax */
+@keyframes hover_line {
+    from {stroke: #ccc;}
+    to {stroke: yellow;}
 }
