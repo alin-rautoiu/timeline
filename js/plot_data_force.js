@@ -153,21 +153,21 @@ label
                 });
                 
                 if(size >= 3) left_right *= -1;
-                
-                d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * k;
-                if(d.__data__.source.x >= w - nodeSize(d) * 2){
-                    d.__data__.source.x = w - nodeSize(d) * 2;
-                }
-                else if(d.__data__.source.x <= nodeSize(d) * 2) {
-                    d.__data__.source.x = nodeSize(d) * 2;
-                }
+                 d.__data__.source.x += (w / 2 + (0 * left_right * 80) - d.__data__.source.x) * k;
+                // d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * k;
+                // if(d.__data__.source.x >= w - nodeSize(d) * 2){
+                //     d.__data__.source.x = w - nodeSize(d) * 2;
+                // }
+                // else if(d.__data__.source.x <= nodeSize(d) * 2) {
+                //     d.__data__.source.x = nodeSize(d) * 2;
+                // }
             }                          
         });
 
         edges.attr('d', function(d){
           var dx = d.target.x - d.source.x;
           var dy = d.target.y - d.source.y;
-          var dr = Math.sqrt(dx * dx + dy * dy);
+          var dr = Math.sqrt(dx * dx + dy * dy) * 0.1;
           
           return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
         });
