@@ -1,5 +1,5 @@
 var w = 1200;
-var h = 1000;
+var h = 1200;
 
 var dataset = {
         nodes: [
@@ -11,7 +11,7 @@ var dataset = {
                 { name: "nhawk", depth: 6}, //5
                 { name: "hawkeye", depth: 7}, //6
                 { name: "invisible", depth: 0}, //7
-                { name: "bendisdare", depth: 5.5}, //4
+                { name: "bendisdare", depth: 6.5}, //8
                 
                 
         ],
@@ -32,7 +32,7 @@ var dataset = {
         ]
 };
 
-var years = [1940, 1955, 1965, 1970, 1981, 2002, 2006, 2012];
+var years = [1940, 1955, 1965, 1970, 1981, 2002, 2012, 2006];
                      
 var force = d3.layout.force()
                      .nodes(dataset.nodes)
@@ -167,7 +167,7 @@ label
         edges.attr('d', function(d){
           var dx = d.target.x - d.source.x;
           var dy = d.target.y - d.source.y;
-          var dr = Math.sqrt(dx * dx + dy * dy) * 0.1;
+          var dr = Math.sqrt(dx * dx + dy * dy) * dx / dy;
           
           return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
         });
