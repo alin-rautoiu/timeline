@@ -68,18 +68,12 @@ $(document).ready( function(){
           step: function(top){
               $(this).css('font-size', top);
           }  
-        }, 500);
+        }, 250);
+        
         if(!isDragging){
             dataset.edges.forEach(function(d){
-                if(d.name.includes(name)){
-                    
-                    $('#' + d.name).animate(
-                    {'top': color},
-                    {step: function(top){
-                        $(this).css('stroke', color);
-                        duration: 500} 
-                    });
-                    
+                if(d.name.includes(name)){                   
+                    $('#' + d.name).css('stroke', color);                    
                 } 
             });
         }
@@ -104,7 +98,7 @@ $(document).ready( function(){
                 step: function(top){
                     $(this).css('font-size', top);
                 }  
-            }, 500);
+            }, 250);
         }
         dataset.edges.forEach(function(d){
                $('#' + d.name).css('stroke', '#ccc');
@@ -121,7 +115,7 @@ $(document).ready( function(){
                 step: function(top){
                     $(this).css('font-size', top);
                 }  
-            }, 500); 
+            }, 250); 
         }
     });
     
