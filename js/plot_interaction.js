@@ -1,38 +1,9 @@
-var dataset = {
-        nodes: [
-                { name: "spirit", depth: 1 }, //0
-                { name: "krigstein", depth: 2}, //1
-                { name: "fury", depth: 3}, //2
-                { name: "master", depth: 4}, //3
-                { name: "daredevil", depth: 5}, //4
-                { name: "nhawk", depth: 6}, //5
-                { name: "hawkeye", depth: 7}, //6
-                { name: "invisible", depth: 0}, //7
-                { name: "bendisdare", depth: 6.5}, //8
-                
-                
-        ],
-        edges: [
-                { source: 0, target: 2, name: 'spirit_fury'},
-                { source: 0, target: 4, name: 'spirit_daredevil'},
-                { source: 0, target: 6, name: 'spirit_hawkeye'},
-                { source: 1, target: 4, name: 'krigstein_daredevil'},
-                { source: 2, target: 3, name: 'fury_master'},                                                
-                { source: 2, target: 4, name: 'fury_daredevil'},
-                { source: 2, target: 6, name: 'fury_hawkeye'},
-                { source: 3, target: 6, name: 'master_daredevil'},
-                { source: 4, target: 8, name: 'daredevil_bendisdare'},
-                { source: 8, target: 6, name: 'bendisdare_hawkeye'},
-                { source: 4, target: 6, name: 'daredevil_hawkeye'},                                                
-                { source: 5, target: 6, name: 'nhawk_hawkeye'},
-                { source: 7, target: 0, name: 'hawkeye_invisile'}
-        ]
-};
-
 $(document).ready( function(){
     $('#hawkeye').on('click', function(){
        console.log("Hawkeye"); 
     });
+    
+    $('#edge_detail').hide();
     
     $('[data-toggle="popover"]').popover();
     
@@ -117,9 +88,10 @@ $(document).ready( function(){
                 }  
             }, 250); 
         }
-    });
+    });   
     
     $('path').on('click', function(){
+        $('#edge_detail').show();
         $('#edge_detail').empty();
         var name = $(this).attr('id');
         $('#edge_detail').append('<h1>' + name + '</h1>');

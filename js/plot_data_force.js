@@ -1,36 +1,8 @@
 var w = 1200;
 var h = 1200;
 
-var dataset = {
-        nodes: [
-                { name: "spirit", depth: 1 }, //0
-                { name: "krigstein", depth: 2}, //1
-                { name: "fury", depth: 3}, //2
-                { name: "master", depth: 4}, //3
-                { name: "daredevil", depth: 5}, //4
-                { name: "nhawk", depth: 6}, //5
-                { name: "hawkeye", depth: 7}, //6
-                { name: "invisible", depth: 0}, //7
-                { name: "bendisdare", depth: 6.5}, //8
-                
-                
-        ],
-        edges: [
-                { source: 0, target: 2, name: 'spirit_fury'},
-                { source: 0, target: 4, name: 'spirit_daredevil'},
-                { source: 0, target: 6, name: 'spirit_hawkeye'},
-                { source: 1, target: 4, name: 'krigstein_daredevil'},
-                { source: 2, target: 3, name: 'fury_master'},                                                
-                { source: 2, target: 4, name: 'fury_daredevil'},
-                { source: 2, target: 6, name: 'fury_hawkeye'},
-                { source: 3, target: 6, name: 'master_daredevil'},
-                { source: 4, target: 8, name: 'daredevil_bendisdare'},
-                { source: 8, target: 6, name: 'bendisdare_hawkeye'},
-                { source: 4, target: 6, name: 'daredevil_hawkeye'},                                                
-                { source: 5, target: 6, name: 'nhawk_hawkeye'},
-                { source: 7, target: 0, name: 'hawkeye_invisile'}
-        ]
-};
+// var dataset = {};
+// $.getJSON('dataset')
 
 var years = [1940, 1955, 1965, 1970, 1981, 2002, 2012, 2006];
                      
@@ -83,14 +55,14 @@ var nodeSize = function(d){
             });
             return size * 10;
 }
- 
+
 var nodes = gnodes
         .append("circle")
         .attr("r", function(d){
             return nodeSize(d);
         })
         .attr("id", function(d, i) {
-            return d.name;
+            return dictionary.nodes[i].name;
         })
         .style("fill", function(d, i) {
                 return colors(i);
@@ -118,9 +90,25 @@ var time = svg.selectAll('text')
     .attr('y', function(d, i){
         return nodes[0][i].__data__.y;
     });
+
+var isName = function(element, array){
+    for(var i = 0; i < array.length; i++){
+        if(array[i].name == element.name){
+            return array[i].display;
+        }
+    }
+    return '';
+}
         
 var label = gnodes.append("text")
-            .text(function(d) {return d.name});             
+            .html(function(d) {
+                return isName(d, dictionary.nodes);
+                })
+            .style('stroke', '#FFF')
+            .style('stroke-width', '1px')
+            .style('paint-order', 'stroke')
+            .style('fill', '#000')    
+                ;             
 
 label
     .attr("text-anchor", "middle")
@@ -165,16 +153,31 @@ label
         });
 
         edges.attr('d', function(d){
-          var dx = d.target.x - d.source.x;
-          var dy = d.target.y - d.source.y;
-          var dr = Math.sqrt(dx * dx + dy * dy) * dx / dy;
-          
-          return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+            var dx = d.target.x - d.source.x;
+            var dy = d.target.y - d.source.y;
+            var dr = Math.sqrt(dx * dx + dy * dy) * dx / dy;
+            var jx = (d.target.x + d.source.x) / 2;
+            var jy = (d.target.y + d.source.y) / 2;
+            
+            
+            var sourcex = d.source.x < w ? d.source.x : w - 50;
+            var sourcey = d.source.y; 
+            var targetx = d.target.x < w ? d.target.x : w - 50;
+            var targety = d.target.y; 
+            
+            if(d.name != 'spirit_hawkeye'){
+                return "M" + sourcex + "," + sourcey + "A" + dr + "," + dr + " 0 0,1 " + targetx + "," + targety;                          
+            } else {
+                return "M" + sourcex + "," + sourcey + "A" + h/2 + "," + h/2 + " 0 0,0 " + targetx + "," + targety;
+            }
         });
 
-       gnodes.attr("transform", function(d) { 
-            return 'translate(' + [d.x, d.y] + ')'; 
-       });
+        gnodes.attr("transform", function(d) {             
+            var x = d.x < w ? d.x : w - 50;
+            var y = d.y;
+            d.x = x; 
+            return 'translate(' + [x, y] + ')'; 
+        });
        
     time
     .attr('x', 300)

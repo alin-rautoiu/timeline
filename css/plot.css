@@ -1,8 +1,13 @@
 #drawing_area{
-    left: -300px;
+    left: -100px;
 }
 
-
+#edge_detail{
+    background-color:grey; 
+    color: white;
+    padding: 5em 5em 5em 5em;
+    top:25vh;
+}
 
 #invisible{
     visibility: hidden;
