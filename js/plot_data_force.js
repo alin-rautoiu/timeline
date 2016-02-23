@@ -1,11 +1,6 @@
 var w = 1200;
-var h = 1200;
-
-// var dataset = {};
-// $.getJSON('dataset')
-
-var years = [1940, 1955, 1965, 1970, 1981, 2002, 2012, 2006];
-                     
+var h = 900;
+                   
 var force = d3.layout.force()
                      .nodes(dataset.nodes)
                      .links(dataset.edges)
@@ -67,12 +62,6 @@ var nodes = gnodes
         .style("fill", function(d, i) {
                 return colors(i);
         })
-        .on('mouseover', function(d){
-            //d3.select(this).style({opacity:'0.8'});
-        })
-        .on('mouseout', function(d){
-            //d3.select(this).style({opacity:'1'});
-        })
         .call(force.drag().on("dragstart", dragstart));
 
 
@@ -101,7 +90,7 @@ var isName = function(element, array){
 }
         
 var label = gnodes.append("text")
-            .html(function(d) {
+            .text(function(d) {
                 return isName(d, dictionary.nodes);
                 })
             .style('stroke', '#FFF')
@@ -116,75 +105,67 @@ label
         return -1 * nodeSize(d) - 5;
     });
         
-    force.on("tick", function(e) {
-    var k = e.alpha;
-    var left_right = 1;
-        edges[0].forEach(function(d, i) {
-            if(i == 0) {
-                d.__data__.source.y = 120;
-                d.__data__.source.x = w / 2;
-            }
-            else if (i == 2)
-            {
-                d.__data__.target.y = h - 200;
-                d.__data__.target.x = w / 2;
-            }
-            else
-            { 
-                d.__data__.source.y += (d.__data__.source.depth * 120 - d.__data__.source.y);
-                
-                var size = 1;
-                dataset.edges.forEach(function(obj){
-                    if(obj.name.includes(d.__data__.source.name)){
-                        size++;
-                    }
-                });
-                
-                if(size >= 3) left_right *= -1;
-                 d.__data__.source.x += (w / 2 + (0 * left_right * 80) - d.__data__.source.x) * k;
-                // d.__data__.source.x += (w / 2 + (size * left_right * 80) - d.__data__.source.x) * k;
-                // if(d.__data__.source.x >= w - nodeSize(d) * 2){
-                //     d.__data__.source.x = w - nodeSize(d) * 2;
-                // }
-                // else if(d.__data__.source.x <= nodeSize(d) * 2) {
-                //     d.__data__.source.x = nodeSize(d) * 2;
-                // }
-            }                          
-        });
+force.on("tick", function(e) {
+var k = e.alpha;
+var left_right = 1;
+    edges[0].forEach(function(d, i) {
+        if(i == 0) {
+            d.__data__.source.y = 120;
+            d.__data__.source.x = w / 2;
+        }
+        else if (i == 2)
+        {
+            d.__data__.target.y = h - 200;
+            d.__data__.target.x = w / 2;
+        }
+        else
+        { 
+            d.__data__.source.y += (d.__data__.source.depth * 120 - d.__data__.source.y);
+            
+            var size = 1;
+            dataset.edges.forEach(function(obj){
+                if(obj.name.includes(d.__data__.source.name)){
+                    size++;
+                }
+            });
+            
+                d.__data__.source.x += (w / 2 - d.__data__.source.x) * k;
+        }                          
+    });
 
-        edges.attr('d', function(d){
-            var dx = d.target.x - d.source.x;
-            var dy = d.target.y - d.source.y;
-            var dr = Math.sqrt(dx * dx + dy * dy) * dx / dy;
-            var jx = (d.target.x + d.source.x) / 2;
-            var jy = (d.target.y + d.source.y) / 2;
-            
-            
-            var sourcex = d.source.x < w ? d.source.x : w - 50;
-            var sourcey = d.source.y; 
-            var targetx = d.target.x < w ? d.target.x : w - 50;
-            var targety = d.target.y; 
-            
-            if(d.name != 'spirit_hawkeye'){
-                return "M" + sourcex + "," + sourcey + "A" + dr + "," + dr + " 0 0,1 " + targetx + "," + targety;                          
-            } else {
-                return "M" + sourcex + "," + sourcey + "A" + h/2 + "," + h/2 + " 0 0,0 " + targetx + "," + targety;
-            }
-        });
+    edges.attr('d', function(d){
+        var dx = d.target.x - d.source.x;
+        var dy = d.target.y - d.source.y;
+        var dr = Math.sqrt(dx * dx + dy * dy) * dx / dy;
+        var jx = (d.target.x + d.source.x) / 2;
+        var jy = (d.target.y + d.source.y) / 2;
+        
+        
+        var sourcex = d.source.x < w ? d.source.x : w - 50;
+        var sourcey = d.source.y; 
+        var targetx = d.target.x < w ? d.target.x : w - 50;
+        var targety = d.target.y; 
+        
+        if(d.name != 'spirit_hawkeye'){
+            return "M" + sourcex + "," + sourcey + "A" + dr + "," + dr + " 0 0,1 " + targetx + "," + targety;                          
+        } else {
+            return "M" + sourcex + "," + sourcey + "A" + h/2 + "," + h/2 + " 0 0,0 " + targetx + "," + targety;
+        }
+    });
 
-        gnodes.attr("transform", function(d) {             
-            var x = d.x < w ? d.x : w - 50;
-            var y = d.y;
-            d.x = x; 
-            return 'translate(' + [x, y] + ')'; 
-        });
-       
-    time
+    gnodes.attr("transform", function(d) {             
+        var x = d.x < w ? d.x : w - 50;
+        var y = d.y;
+        d.x = x; 
+        return 'translate(' + [x, y] + ')'; 
+    });
+    
+time
     .attr('x', 300)
     .attr('y', function(d, i){
         return nodes[0][i].__data__.y;
-    });   
-                
-    });
-    
+});   
+            
+});
+
                                                          

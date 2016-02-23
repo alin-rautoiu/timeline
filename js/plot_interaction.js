@@ -91,7 +91,11 @@ $(document).ready( function(){
     });   
     
     $('path').on('click', function(){
-        $('#drawing_area').css('left', -300);
+        $('#drawing_area').animate({
+            left: '-300px',}
+            ,300
+            );
+        
         $('#edge_detail').show();
         $('#edge_detail').empty();
         var name = $(this).attr('id');
